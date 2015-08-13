@@ -1,0 +1,13 @@
+
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+<%- model_class = Receiving -%>
+
+  <%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %> | <%= model_class.model_name %>
+    <div style="float: right;color: #888888;">Received By : <%= @receiving.user.name %></div>
+  </div>
+  <div class="panel-body">
+<%= render :partial => 'form' %>
+  </div>
+</div>

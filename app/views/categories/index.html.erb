@@ -1,0 +1,66 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%- model_class = Category -%>
+    <%= image_tag('table_multiple.png') %>
+    <%= t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+    <div style="float: right;">
+      <%= link_to new_category_path(:page=>params[:page]), :class => 'btn btn-primary btn-xs' do %>
+          <span class="glyphicon glyphicon-plus"></span>
+         New Category
+      <% end %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= form_tag :delcatsg do %>
+        <div class="table-responsive">
+          <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+              <th>
+                <!--for sorting-->
+                <% if params[:sort]=='name' %>
+                    <%= link_to 'Name', categories_path(:sort => 'up',:page=>params[:page]) %>
+                    <%= link_to up_arrow, categories_path(:sort => 'up',:page=>params[:page]) %>
+                <% else %>
+                    <%= link_to 'Name', categories_path(:sort => 'name',:page=>params[:page]) %>
+                    <%= link_to down_arrow, categories_path(:sort => 'name',:page=>params[:page]) %>
+                <% end %>
+                <!--end sorting-->
+              </th>
+              <th><%= model_class.human_attribute_name(:created_at) %></th>
+               <th class="text-center"><%= button_tag '',:page=>params[:page], :data => {:confirm => 'Are you sure to delete category!'}, :class => 'btn btn-danger btn-xs glyphicon glyphicon-minus' %></th>
+              <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @categories.each do |category| %>
+                <tr class="show_control">
+                  <td><%= category.name %></td>
+                  <td><%= category.created_at.strftime("%d-%m-%Y") %></td>
+                   <td class="text-center">
+                    <%= check_box_tag 'del_array[]', category.id %>
+                  </td>
+                  <td class="text-center">
+                    <div class="hide_control">
+                    <%= link_to category_path(category,:page=>params[:page]), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+                        <%= show  %>
+                    <%- end -%>
+                    <%= link_to edit_category_path(category,:page=>params[:page]), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+                        <%= glyph 'pencil' %>
+                    <%- end -%>
+                    </div>
+                  </td>
+
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% end %>
+    <div style="text-align: center;">
+      <%= will_paginate @receivings, renderer: BootstrapPagination::Rails %>
+    </div>
+
+  </div>
+</div>

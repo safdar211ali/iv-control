@@ -1,0 +1,63 @@
+<%= form_for @receiving, :html => {:class => 'form-horizontal'} do |f| %>
+
+    <%= f.hidden_field :item_id %>
+    <%= f.hidden_field :category_id %>
+    <div class="form-group ">
+      <%= f.label 'Item', :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :name, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label 'present', :class => 'control-label col-md-2' %>
+      <div class="col-md-8" style="float: left;">
+        <%= f.text_field :qtypresent, :readonly => true, :id => 'value1', :class => 'text_field form-control' %>
+      </div>
+      <div class="col-md-2" style="float: right;">
+        <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label 'balance', :class => 'control-label col-md-2' %>
+      <div class="col-md-8" style="float: left;">
+        <%= f.text_field :qtybalance, :readonly => true, :id => 'result', :class => 'text_field form-control' %>
+      </div>
+      <div class="col-md-2" style="float: right;">
+        <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, :class => 'control-label col-md-2 ' %>
+      <div class="col-md-10">
+        <%= f.text_area :description, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :expiry, :class => 'control-label col-md-2 ' %>
+      <div class="col-md-10">
+        <%= f.text_field :expiry, order: [:day, :month, :year], :end_year => Date.current.year + 20, :class => 'text_field form-control',:id=>'pic-date' %>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <%= f.label 'received', :class => 'control-label col-md-2 ' %>
+      <div class="col-md-8" style="float: left;">
+        <%= f.text_field :qtyreceived, :id => 'value2', :class => 'text_field form-control' %>
+      </div>
+      <div class="col-md-2" style="float: right;">
+        <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class='col-md-offset-2 col-md-10'>
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    receivings_path, :class => 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

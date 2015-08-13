@@ -1,0 +1,8 @@
+
+<h3>Welcome To Lab. Stock Management System</h3>
+    <%if current_user.role !='admin'  %>
+        <% flash[:notice] = 'User is not approved still.' %>
+        <%end %>
+
+
+

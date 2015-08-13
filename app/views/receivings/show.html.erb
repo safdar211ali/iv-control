@@ -1,0 +1,63 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+<%- model_class = Receiving -%>
+
+  <%= 'Show' %> | <%=t '.title', :default => model_class.model_name.human.titleize %>
+    <div style="float: right;color: #888888;">Received By : <%= @receiving.user.name %></div>
+</div>
+
+    <div class="panel-body">
+
+<div class="fieldset col-md-6" style="float:left;">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:item_id) %></dt>
+      <dd><pre class="prettyprint"><%= @receiving.item.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @receiving.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:qtypresent) %></dt>
+      <dd><pre class="prettyprint"><%= pluralize(@receiving.qtypresent,@receiving.item.unit) %></pre></dd>
+  </dl>
+  </div>
+  <div class="fieldset col-md-6" style="float:left;">
+  <dl>
+    <dt class="label label-default"><%= model_class.human_attribute_name(:qtyreceived) %></dt>
+      <dd><pre class="prettyprint"><%= pluralize(@receiving.qtyreceived,@receiving.item.unit) %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:qtybalance) %></dt>
+      <dd><pre class="prettyprint"><%= pluralize(@receiving.qtybalance,@receiving.item.unit) %></pre></dd>
+       <dt class="label label-default"><%= model_class.human_attribute_name(:expiry) %></dt>
+      <dd><pre class="prettyprint"><%= @receiving.expiry %></pre></dd>
+  </dl>
+</div>
+      <div class=" col-md-6 col-md-offset-3">
+        <dl>
+        <dt class="label label-default"><%= model_class.human_attribute_name(:category_id) %></dt>
+        <dd><pre class="prettyprint"><%= @receiving.category.blank? ? 'no category' : @receiving.category.name %></pre></dd>
+        </dl>
+        </div>
+
+      <div class="col-md-8" style="padding-top: 20px; float: right;">
+
+  <%= link_to receivings_path, :class => 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      Back
+  <% end %>
+
+
+
+  <%= link_to edit_receiving_path(@receiving), :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+      Edit
+  <% end %>
+
+
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              receiving_path(@receiving),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+          </div>
+
+        </div>
+      </div>
+

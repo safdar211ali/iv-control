@@ -1,0 +1,10 @@
+<%= form_tag :controller => :repstock,:action => :rep_stock do %>
+    <div class="form-group">
+      <div class="col-md-10">
+  <%= collection_select :q,:id,Item.all,:id,:name,{:prompt=>'Select An Item'}, :class => 'text_field form-control'  %>
+        </div>
+      </div>
+    <div class="form-group">
+    <%= submit_tag "Find", :name => nil, :class => 'btn btn-primary' %>
+        </div>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+   <%= image_tag('home2.png') %> Search Stock
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+ <!--Single stock-->
+       <div class="list-group-item col-md-6">
+      <%= render :partial => 'repstock/search_single' %>
+        </div>
+      <!--All expired Stock-->
+      <div class="list-group-item col-md-6">
+        <%= link_to 'All Expired',repstockg_path(:expired=>'expired') %>
+      </div>
+      <!--All Stock-->
+      <div class="list-group-item col-md-6">
+        <%= link_to 'All Stock',repstockg_path(:all_stock=>'all') %>
+      </div>
+      <!--Zero Stock -->
+      <div class="list-group-item col-md-6">
+        <%= link_to 'Zero Stock',repstockg_path(:zero_stock=>'zero') %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+

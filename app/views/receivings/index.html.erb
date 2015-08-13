@@ -1,0 +1,94 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%- model_class = Receiving -%><%= image_tag('add.png') %>
+    <%= t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+            <div style="float: right;">
+        <%= link_to newstock_path, :class => 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span>
+            New Receiving
+        <% end %>
+      </div>
+  </div>
+  <div class="panel-body">
+      <div class="table-responsive">
+    <table  class="table  table-condensed table-hover">
+      <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:user_id) %></th>
+        <!--for sorting-->
+        <th>
+          <% if params[:sort]=='cid' or params[:sort]=='name' or params[:sort]=='expiry' %>
+              <%= link_to 'Category', receivings_path(:sort => 'up',:page=>params[:page]) %>
+              <%= link_to up_arrow, receivings_path(:sort => 'up',:page=>params[:page]) %>
+          <% else %>
+              <%= link_to 'Category', receivings_path(:sort => 'cid',:page=>params[:page]) %>
+              <%= link_to down_arrow, receivings_path(:sort => 'cid',:page=>params[:page]) %>
+          <% end %>
+        </th>
+        <!--end sorting-->
+
+        <!--for sorting-->
+        <th>
+          <% if params[:sort]=='name' or params[:sort]=='cid' or params[:sort]=='expiry' %>
+              <%= link_to 'Name', receivings_path(:sort => 'upn',:page=>params[:page]) %>
+              <%= link_to up_arrow, receivings_path(:sort => 'upn',:page=>params[:page]) %>
+          <% else %>
+              <%= link_to 'Name', receivings_path(:sort => 'name',:page=>params[:page]) %>
+              <%= link_to down_arrow, receivings_path(:sort => 'name',:page=>params[:page]) %>
+          <% end %>
+        </th>
+        <!--end sorting-->
+        <th><%= model_class.human_attribute_name('present') %></th>
+        <th><%= model_class.human_attribute_name('received') %></th>
+        <th><%= model_class.human_attribute_name('balance') %></th>
+        <!--for sorting-->
+        <th>
+          <% if params[:sort]=='cid' or params[:sort]=='name' or params[:sort]=='exp'%>
+              <%= link_to 'Expiry', receivings_path(:sort => 'upe',:page=>params[:page]) %>
+              <%= link_to up_arrow, receivings_path(:sort => 'upe',:page=>params[:page]) %>
+          <% else %>
+              <%= link_to 'Expiry', receivings_path(:sort => 'exp',:page=>params[:page]) %>
+              <%= link_to down_arrow, receivings_path(:sort => 'exp',:page=>params[:page]) %>
+          <% end %>
+        </th>
+        <!--end sorting-->
+        <th><%= model_class.human_attribute_name(:created_at) %></th>
+        <th><%= t '.actions', :default => t("helpers.actions") %></th>
+           </tr>
+      </thead>
+      <tbody>
+      <% @receivings.each do |receiving| %>
+          <tr class="show_control">
+            <td><%= receiving.user.name %></td>
+            <td><%= receiving.item.name %></td>
+            <td><%= receiving.category.blank? ? 'no category ' : receiving.category.name  %></td>
+            <td><%=pluralize(receiving.qtypresent,receiving.item.unit )  %></td>
+            <td><%= pluralize(receiving.qtyreceived,receiving.item.unit) %></td>
+            <td><%= pluralize(receiving.qtybalance,receiving.item.unit) %></td>
+            <td><%= receiving.expiry.strftime("%d-%m-%Y")%></td>
+            <td><%= receiving.created_at.strftime("%d-%m-%Y")%></td>
+            <td>
+              <div class="hide_control">
+              <%= link_to receiving_path(receiving), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+                  <%= show %>
+              <%- end -%>
+              <%= link_to edit_receiving_path(receiving), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+                  <%= glyph 'pencil' %>
+              <%- end -%>
+              <%= link_to receiving_path(receiving), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+                  <%= glyph 'remove' %>
+              <%- end -%>
+              </div>
+            </td>
+
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+       <div style="text-align: center;">
+    <%= will_paginate @receivings, renderer: BootstrapPagination::Rails %>
+</div>
+  </div>
+</div>

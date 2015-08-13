@@ -1,0 +1,10 @@
+
+
+<div style="margin-left:15%;">
+ <div style="margin-left:13%;margin-bottom: 50px;"><%= image_tag('back_text.png') %></div>
+  <%= link_to(image_tag('blue_experiment.png',:id => 'welcom',:class=>"img-thumbnail",style:'background:none',:title => 'Data Input Area'),categories_path) %>
+  <%= link_to(image_tag('blue_stock.png',:id => 'stockg',:class=>"img-thumbnail",style:'background:none',:title => 'Reporting Area'),stockselect_path) %>
+  <%= link_to(image_tag('signup.png',:id => 'signup',:class=>"img-thumbnail",style:'background:none',:title => 'Sign up'), new_user_registration_path) %>
+  <%= link_to(image_tag('logout.png',:id => 'logout',:class=>"img-thumbnail",style:'background:none',:title => 'Log out'), destroy_user_session_path , method: :delete) %>
+  <%= link_to(image_tag('blue_developer.png',:id => 'setting',:class=>"img-thumbnail",style:'background:none',:title => 'Settings of user Account'), edit_user_registration_path ) %>
+     </div>

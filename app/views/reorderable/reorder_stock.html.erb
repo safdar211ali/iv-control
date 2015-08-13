@@ -1,0 +1,49 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    Expired Stock
+  </div>
+  <div style="float: right;color: #888888;"></div>
+</div>
+<div class="panel-body">
+  <table class="table table-hover table-condensed">
+    <tbody>
+    <% unless @items.blank? %>
+        <% n=0 %>
+        <% @items.each do |item| %>
+            <% n = n+1 %>
+            <tr class="alert alert-info">
+              <td>
+                <%= n %>- <i>name</i> : <%= item.name %>
+              </td>
+              <td>
+                <i>cas no </i>: <%= item.cas_no %>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="label label-info glyphicon glyphicon-hand-down">EXPIRED AT</span></td>
+              <td><span class="label label-info glyphicon glyphicon-hand-down">QTY. </span></td>
+            </tr>
+            <% item.reorderable.each do |stock| %>
+                <tr>
+                <td><%= stock.expiry %></td>
+                <td><%= stock.qtyreceived %></td>
+                <tr>
+            <% end %>
+            <tr>
+              <td>
+                <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+              </td>
+              <td><strong> <%= item.exp_sum_stock %></strong></td>
+            </tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</div>

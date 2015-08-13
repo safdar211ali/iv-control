@@ -1,0 +1,198 @@
+<!--single item-->
+<% unless @item.blank? %>
+    <div class="panel panel-info">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+       <%= receiving %> Received Stock
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-condensed">
+          <tr>
+            <th><span class=" glyphicon glyphicon-hand-down">RECEIVED AT</span></th>
+            <th><span class="glyphicon glyphicon-hand-down">RECEIVED BY</span></th>
+            <th><span class=" glyphicon glyphicon-hand-down">QTY. RECEIVED </span></th>
+          </tr>
+          <tbody>
+          <% n=0 %>
+          <% n = n+1 %>
+          <tr class="alert alert-info">
+            <td>
+              <%= n %>- <i>name</i> :<%= @item.name %>
+            </td>
+            <td>
+              <i>cas no </i>:<%= @item.cas_no %>
+            </td>
+            <td></td>
+          </tr>
+
+          <% @item.received.each do |issue| %>
+              <tr>
+                <td><%= issue.created_at %></td>
+                <td><%= issue.user.name %></td>
+                <td><%= issue.tot %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td>
+
+              <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+
+            </td>
+            <td></td>
+            <td>
+              <strong>  <%= @item.received_sum %></strong>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% end %>
+
+<!--all items-->
+<% unless @items.blank? %>
+    <div class="panel panel-info">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <%= receiving %>  All Received Stock
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-condensed">
+          <tr>
+            <th><span class=" glyphicon glyphicon-hand-down">RECEIVED AT</span></th>
+            <th><span class="glyphicon glyphicon-hand-down">RECEIVED BY</span></th>
+            <th><span class=" glyphicon glyphicon-hand-down">QTY. RECEIVED </span></th>
+          </tr>
+          <tbody>
+          <% n=0 %>
+          <% @items.each do |item| %>
+              <% n = n+1 %>
+              <tr class="alert alert-info">
+                <td>
+                  <%= n %>- <i>name</i> :<%= item.name %>
+                </td>
+                <td>
+                  <i>cas no </i>:<%= item.cas_no %>
+                </td>
+                <td></td>
+              </tr>
+              <% item.received.each do |issue| %>
+                  <tr>
+                    <td><%= issue.created_at %></td>
+                    <td><%= issue.user.name %></td>
+                    <td><%= issue.tot %></td>
+                  </tr>
+              <% end %>
+              <tr>
+                <td>
+                  <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+                </td>
+                <td></td>
+                <td>
+                  <strong>   <%= item.received_sum %></strong>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% end %>
+
+<!--all items between Dates-->
+<% unless @items_by_date.blank? %>
+    <div class="panel panel-info">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <%= receiving %>  All Received Stock Between Dates  <%= image_tag('dates.png') %> <%= @d1 %> And <%= image_tag('dates.png') %> <%= @d2 %>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-condensed">
+          <tr>
+            <th><span class=" glyphicon glyphicon-hand-down">RECEIVED AT</span></th>
+            <th><span class="glyphicon glyphicon-hand-down">RECEIVED BY</span></th>
+            <th><span class=" glyphicon glyphicon-hand-down">QTY. RECEIVED </span></th>
+          </tr>
+          <tbody>
+          <% n=0 %>
+          <% @items_by_date.each do |item| %>
+              <% n = n+1 %>
+              <tr class="alert alert-info">
+                <td>
+                  <%= n %>- <i>name</i> :<%= item.name %>
+                </td>
+                <td>
+                  <i>cas no </i>:<%= item.cas_no %>
+                </td>
+                <td></td>
+              </tr>
+              <% item.received_by_date(@d1, @d2).each do |issue| %>
+                  <tr>
+                    <td><%= issue.created_at %></td>
+                    <td><%= issue.user.name %></td>
+                    <td><%= issue.tot %></td>
+                  </tr>
+              <% end %>
+              <tr>
+                <td>
+                  <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+                </td>
+                <td></td>
+                <td><strong><%= item.received_sum_by_date(@d1, @d2) %></strong></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% end %>
+ <!--all received by category-->
+<% unless @items_by_cat.blank? %>
+    <div class="panel panel-info">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <%= receiving %> All Received Stock Under   Category :<%= image_tag('table_multiple.png') %> <%= @cat_name.blank? ? 'No Category' : @cat_name.name %>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-condensed">
+          <tr>
+            <th><span class=" glyphicon glyphicon-hand-down">RECEIVED AT</span></th>
+            <th><span class="glyphicon glyphicon-hand-down">RECEIVED BY</span></th>
+            <th><span class=" glyphicon glyphicon-hand-down">QTY. RECEIVED </span></th>
+          </tr>
+          <tbody>
+          <% n=0 %>
+          <% @items_by_cat.each do |item| %>
+              <% n = n+1 %>
+              <tr class="alert alert-info">
+                <td>
+                  <%= n %>- <i>name</i> :<%= item.name %>
+                </td>
+                <td>
+                  <i>cas no </i>:<%= item.cas_no %>
+                </td>
+                <td></td>
+              </tr>
+              <% item.received.each do |issue| %>
+                  <tr>
+                    <td><%= issue.created_at %></td>
+                    <td><%= issue.user.name %></td>
+                    <td><%= issue.tot %></td>
+                  </tr>
+              <% end %>
+              <tr>
+                <td>
+                  <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+                </td>
+                <td></td>
+                <td>
+                  <strong>   <%= item.received_sum %></strong>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% end %>

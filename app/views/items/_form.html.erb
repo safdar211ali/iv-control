@@ -1,0 +1,46 @@
+<%= form_for @item, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :category_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.collection_select :category_id,@categories,:id,:name,{:prompt=>'Select A Category'}, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :name, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_area :description, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :cas_no, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :cas_no, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :reorder_level, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :reorder_level, :class => 'text_field form-control' %>
+    </div>
+  </div>
+    <div class="form-group">
+      <%= f.label :unit, :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.select :unit,Item::UNIT,{:prompt=>'Select A Unit'}, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  items_path(:page=>params[:page]), :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

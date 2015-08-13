@@ -1,0 +1,86 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%- model_class = Issuance -%><%= image_tag('destroy.png') %>
+    <%= t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+
+    <div style="float: right;">
+      <%= link_to newissue_path, :class => 'btn btn-primary btn-xs' do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          New Issuance
+      <% end %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:user_id) %></th>
+          <!--for sorting-->
+          <th>
+            <% if params[:sort]=='name' or params[:sort]=='ca' %>
+                <%= link_to 'Name', issuances_path(:sort => 'up', :page => params[:page]) %>
+                <%= link_to up_arrow, issuances_path(:sort => 'up', :page => params[:page]) %>
+            <% else %>
+                <%= link_to 'Name', issuances_path(:sort => 'name', :page => params[:page]) %>
+                <%= link_to down_arrow, issuances_path(:sort => 'name', :page => params[:page]) %>
+            <% end %>
+          </th>
+          <th><%= model_class.human_attribute_name('Category') %></th>
+          <!--end sorting-->
+          <th><%= model_class.human_attribute_name(:description) %></th>
+          <th><%= model_class.human_attribute_name(:qtypresent) %></th>
+          <th><%= model_class.human_attribute_name(:qtyissued) %></th>
+          <th><%= model_class.human_attribute_name(:qtybalance) %></th>
+          <!--for sorting-->
+          <th><%= model_class.human_attribute_name(:expiry) %></th>
+          <th>
+            <% if params[:sort]=='name' or params[:sort]=='ca' %>
+                <%= link_to 'Created_At', issuances_path(:sort => 'upc', :page => params[:page]) %>
+                <%= link_to up_arrow, issuances_path(:sort => 'upc', :page => params[:page]) %>
+            <% else %>
+                <%= link_to 'Created_At', issuances_path(:sort => 'ca', :page => params[:page]) %>
+                <%= link_to down_arrow, issuances_path(:sort => 'ca', :page => params[:page]) %>
+            <% end %>
+          </th>
+          <!--end sorting-->
+          <th><%= t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @issuances.each do |issuance| %>
+            <tr class="show_control">
+              <td><%= issuance.user.name %></td>
+              <td><%= issuance.item.name %></td>
+              <td><%= issuance.category.blank? ? 'no category' : issuance.category.name %></td>
+              <td><%= issuance.description %></td>
+              <td><%= pluralize(issuance.qtypresent, issuance.item.unit) %></td>
+              <td><%= pluralize(issuance.qtyissued, issuance.item.unit) %></td>
+              <td><%= pluralize(issuance.qtybalance, issuance.item.unit) %></td>
+              <td><%= issuance.expiry.strftime("%d-%m-%Y") %></td>
+              <td><%= issuance.created_at.strftime("%d-%m-%Y") %></td>
+              <td>
+                <div class="hide_control">
+                  <%= link_to issuance_path(issuance), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+                      <%= show %>
+                  <%- end -%>
+                  <%= link_to edit_issuance_path(issuance), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+                      <%= glyph 'pencil' %>
+                  <%- end -%>
+                  <%= link_to issuance_path(issuance), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+                      <%= glyph 'remove' %>
+                  <%- end -%>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to "Download as Excel", issuances_path(format: "xlsx") %>
+    <div style="text-align: center;">
+      <%= will_paginate @issuances, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>

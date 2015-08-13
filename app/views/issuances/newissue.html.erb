@@ -1,0 +1,22 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <div class="panel-body">
+      <%= form_for @issuance,:url => new_issuance_path, :html => { :class => 'form-horizontal' } do |f| %>
+          <div class="form-group ">
+            <div class="col-md-10">
+              <%= f.select( "id", options_from_collection_for_select(Stock.order(:item_id), "id", "present_stock"),{:prompt=>'Select An Item'},:class => 'text_field form-control') %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-md-offset-2 col-md-10'>
+              <%= f.submit nil, :class => 'btn btn-primary' %>
+              <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                          issuances_path, :class => 'btn btn-default' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

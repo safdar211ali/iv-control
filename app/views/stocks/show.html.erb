@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to stocks_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_stock_path(@stock), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show stock</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Item:</dt>
+  <dd><%= @stock.item_id %></dd>
+
+  <dt>Qtypersent:</dt>
+  <dd><%= @stock.qtypresent %></dd>
+
+  <dt>Expiry:</dt>
+  <dd><%= @stock.expiry %></dd>
+
+</dl>

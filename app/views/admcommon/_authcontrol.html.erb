@@ -1,0 +1,5 @@
+<% if session[:user_id] %>
+    <li><%= link_to "Log out", :controller => :staff,:action => :logout %></li>
+<% else %>
+       <li><%= link_to "Log in", :controller => :staff,:action => :login %></li>
+<% end %>

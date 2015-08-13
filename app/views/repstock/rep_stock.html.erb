@@ -1,0 +1,196 @@
+<!--All Stock-->
+<%unless @itemlists.blank? %>
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+   <%= stock %> All Stock
+
+  </div>
+
+<div class="panel-body">
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th></t><span class=" glyphicon glyphicon-hand-down">EXPIRY</span></th>
+      <th><span class=" glyphicon glyphicon-hand-down">QTY. PRESENT </span></th>
+    </tr>
+    <tbody>
+
+        <% n=0 %>
+        <% @itemlists.each do |item| %>
+            <% n = n+1 %>
+            <tr class="alert alert-info">
+              <td>
+                <%= n %>- <i>name</i> : <%= item.name %>
+              </td>
+              <td>
+                <i>cas no </i>: <%= item.cas_no %>
+              </td>
+            </tr>
+
+            <% item.stocks.each do |stock| %>
+                <tr>
+                  <td><%= stock.expiry %></td>
+                  <td><%= stock.qtyreceived %></td>
+                </tr>
+            <% end %>
+            <tr>
+              <td>
+
+                <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+
+              </td>
+              <td>
+                <strong><%= item.sum_stock %></strong>
+
+              </td>
+            </tr>
+        <% end %>
+
+
+    </tbody>
+  </table>
+</div>
+</div>
+
+<% end %>
+
+
+<!--All zero stock-->
+<%unless @items.blank? %>
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%= stock %> All Zero Stock
+
+  </div>
+
+<div class="panel-body">
+  <table class="table table-hover table-condensed">
+    <tbody>
+
+        <% n=0 %>
+        <% @items.each do |item| %>
+            <% n = n+1 %>
+            <tr class="alert alert-info">
+              <td>
+                <%= n %>- <i>name</i> : <%= item.name %>
+              </td>
+              <td>
+                <i>cas no </i>: <%= item.cas_no %>
+              </td>
+              <td>
+                <i>qty. present </i>: <%= item.stocks.total(item.id) %>
+              </td>
+            </tr>
+
+        <% end %>
+
+    </tbody>
+  </table>
+</div>
+</div>
+<% end %>
+
+<!--Single stock-->
+
+<%unless @itemlist.blank? %>
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%= stock %> Single Item Stock
+  </div>
+  <div class="panel-body">
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th></t><span class="glyphicon glyphicon-hand-down">EXPIRY</span></th>
+      <th><span class="glyphicon glyphicon-hand-down">QTY. PRESENT </span></th>
+    </tr>
+    <tbody>
+
+        <% n=0 %>
+        <% n = n+1 %>
+        <tr class="alert alert-info">
+          <td>
+            <%= n %>- <i>name</i> : <%= @itemlist.name %>
+          </td>
+          <td>
+            <i>cas no </i>: <%= @itemlist.cas_no %>
+          </td>
+        </tr>
+
+        <%  @itemlist.stocks.each do |stock| %>
+            <tr>
+              <td><%= stock.expiry %></td>
+              <td><%= stock.qtyreceived%></td>
+            </tr>
+        <% end %>
+        <tr>
+          <td>
+
+            <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+
+          </td>
+          <td>
+            <strong><%=  @itemlist.sum_stock %></strong>
+
+          </td>
+        </tr>
+
+
+    </tbody>
+  </table>
+</div>
+</div>
+<% end %>
+
+
+<!--Expired stock-->
+<% unless @expired_items.blank? %>
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%= stock %>  Expired Stock
+  </div>
+
+<div class="panel-body">
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th><span class="glyphicon glyphicon-hand-down">EXPIRED AT</span></th>
+      <th><span class="glyphicon glyphicon-hand-down">QTY. </span></th>
+    </tr>
+    <tbody>
+        <% n=0 %>
+        <% @expired_items.each do |item| %>
+            <% n = n+1 %>
+            <tr class="alert alert-info">
+              <td>
+                <%= n %>- <i>name</i> : <%= item.name %>
+              </td>
+              <td>
+                <i>cas no </i>: <%= item.cas_no %>
+              </td>
+            </tr>
+
+            <% item.stocks.expired.each do |stock| %>
+                <tr>
+                  <td><%= stock.expiry %></td>
+                  <td><%= stock.tot %></td>
+                <tr>
+            <% end %>
+            <tr>
+              <td>
+                <span class=" glyphicon glyphicon-hand-right label label-default ">SUM</span>
+              </td>
+              <td><strong> <%= item.exp_sum_stock %></strong></td>
+            </tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+<% end %>

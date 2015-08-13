@@ -1,0 +1,47 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+<%- model_class = Item -%>
+  <%= 'Show' %> | <%=t '.title', :default => model_class.model_name.human.titleize %>
+</div>
+  <div class="panel-body">
+    <div class="fieldset col-md-6" style="float:left;">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:category_id) %></dt>
+      <dd><pre class="prettyprint"><%= @item.category.blank? ? 'no category' : @item.category.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @item.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @item.description %></pre></dd>
+    <dt class="label label-default"><%= model_class.human_attribute_name(:created_at) %></dt>
+    <dd><pre class="prettyprint"><%= @item.created_at %></pre></dd>
+    </dl>
+      </div>
+    <div class="fieldset col-md-6" style="float:left;">
+      <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:cas_no) %></dt>
+      <dd><pre class="prettyprint"><%= @item.cas_no %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:reorder_level) %></dt>
+      <dd><pre class="prettyprint"><%= @item.reorder_level %></pre></dd>
+    <dt class="label label-default"><%= model_class.human_attribute_name(:unit) %></dt>
+    <dd><pre class="prettyprint"><%= @item.unit %></pre></dd>
+  </dl>
+</div>
+
+    <div class="col-md-8" style="padding-top: 20px; float: right;">
+  <%= link_to items_path(:page=>params[:page]), :class => 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      Back
+  <% end %>
+  <%= link_to edit_item_path(@item,:page=>params[:page]), :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+      Edit
+  <% end %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              item_path(@item,:page=>params[:page]),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
+  </div>
+    </div>

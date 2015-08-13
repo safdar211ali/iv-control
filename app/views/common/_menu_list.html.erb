@@ -1,0 +1,17 @@
+<div class="list-group menu_bg" style="position: fixed;">
+  <div class="list-group-item active" style="text-align: center;">
+    Menu
+  </div>
+
+  <%= link_to ' Manage Categories',categories_path,:class=>"list-group-item glyphicon glyphicon-th" %>
+  <%= link_to ' Manage Items',items_path,:class=>"list-group-item glyphicon glyphicon-list" %>
+  <%= link_to ' Manage Receivings',receivings_path,:class=>"list-group-item glyphicon glyphicon-hand-down" %>
+  <%= link_to ' Manage Issuances',issuances_path,:class=>"list-group-item glyphicon glyphicon-hand-up" %>
+  <%= link_to ' Stocks',stocks_path,:class=>"list-group-item glyphicon glyphicon-align-justify" %>
+  <div class="list-group-item list-group-item-info" style="text-align: center;">
+    Reports
+  </div>
+  <%= link_to ' Items List',itemlists_path,:class=>"list-group-item glyphicon glyphicon-list-alt" %>
+  <%= link_to ' Expired Items',itemexpired_path,:class=>"list-group-item glyphicon glyphicon-trash" %>
+  <%= link_to ' Issued By Date',issuedbydateg_path,:class=>"list-group-item glyphicon glyphicon-calendar" %>
+</div>

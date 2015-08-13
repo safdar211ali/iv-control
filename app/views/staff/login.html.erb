@@ -1,0 +1,30 @@
+
+<% @page_title='Staff Area Login' %>
+<div class="panel panel-info col-md-offset-5">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Admin Login
+  </div>
+  <div class="panel-body">
+<div class="col-md-8 col-md-offset-2">
+
+  <%= form_tag(:action => 'send_login') do %>
+      <div class="form-group">
+      <p>Username: <%= text_field_tag 'username', params[:username],:class => 'text_field form-control' %></p>
+
+      <p>Password: <%= password_field_tag 'password', params[:password], :class => 'text_field form-control' %></p>
+
+      <p><%= submit_tag 'Log in', :class => 'btn btn-primary col-md-offset-8' %></p>
+      </div>
+  <% end %>
+  <div>
+
+  </div>
+</div>
+    <%= link_to 'Add new Admin',admins_path %>
+</div>
+    </div>
+
+
+
+
+

@@ -1,0 +1,69 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%= image_tag('home2.png') %> Search Item Receiving
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <!--Single Issuance-->
+      <div class="list-group-item col-md-6">
+        <%= form_tag :controller => :received, :action => :rep_received do %>
+            <div class="form-group">
+              <div class="col-md-10">
+                <%= collection_select :q, :id, Item.all, :id, :name, {:prompt => 'Select An Item To Find Issuance'}, :class => 'text_field form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Find", :name => nil, :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+      </div>
+      <!--All Between Dates -->
+      <div class="list-group-item col-md-6">
+        <%= form_tag :controller => :received, :action => :rep_received do %>
+            <div class="form-group">
+              <div class="col-md-5">
+                <%= collection_select :a,:s_d,@receive_dates,:created_at,:created_at,{:prompt=>'Select Start Date'}, :class => 'text_field form-control' %>
+              </div>
+              <div class="col-md-5">
+                <%= collection_select :a,:e_d,@receive_dates ,:created_at, :created_at,{:prompt=>'Select End Date'},:class => 'text_field form-control' %>
+              </div>
+            </div>
+            <div class="form-group ">
+              <%= submit_tag "Find", :name => nil, :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <!--All issuance by user-->
+      <div class="list-group-item col-md-6">
+        <%= form_tag :controller => :received, :action => :rep_received do %>
+            <div class="form-group">
+              <div class="col-md-10">
+                <%= collection_select :u, :id, User.all, :id, :name, {:prompt => 'Select A User To Find Issuance By User'}, :class => 'text_field form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Find", :name => nil, :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+      </div>
+<!-All received by category--->
+      <div class="list-group-item col-md-6">
+        <%= form_tag :controller => :received, :action => :rep_received do %>
+            <div class="form-group">
+              <div class="col-md-10">
+                <%= collection_select :c, :id, Category.all, :id, :name, {:prompt => 'Select A Category To Find Received By Category'}, :class => 'text_field form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Find", :name => nil, :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,76 @@
+<%= form_for @issuance, :html => {:class => 'form-horizontal'} do |f| %>
+    <%= f.hidden_field :item_id %>
+    <%= f.hidden_field :stock_id %>
+    <%= f.hidden_field :category_id %>
+    <div class="form-group">
+      <%= f.label :name, :class => 'control-label col-md-1' %>
+      <div class="col-md-11">
+        <%= f.text_field :name, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :expiry, :class => 'control-label col-md-1' %>
+      <div class="col-md-11">
+        <%= f.text_field :expiry, :readonly => true, :class => 'text_field form-control' ,:id=>'pic-date'%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label 'Qty', :class => 'control-label col-md-1' %>
+      <div class="col-md-3" style="float: left;">
+        <%= f.text_field :qtysingle, :readonly => true, :id => 'Qty', :class => 'text_field form-control' %>
+      </div>
+      <div class="col-md-2" style="float: left;">
+        <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+      <%= f.label 'Sum', :class => 'control-label col-md-1' %>
+      <div class="col-md-3" style="float: left;">
+              <%= f.text_field :qtypresent, :readonly => true, :id => 'qtypresent', :class => 'text_field form-control' %>
+        </div>
+        <div class="col-md-2" style="float: left;">
+          <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label 'balance', :class => 'control-label col-md-1' %>
+      <div class="col-md-3" style="float: left;">
+         <%= f.text_field :qtysingleb, :readonly => true, :id => 'qtysingleb', :class => 'text_field form-control' %>
+        </div>
+        <div class="col-md-2" style="float: left;">
+          <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+        </div>
+      <%= f.label 'Sum balance', :class => 'control-label col-md-1' %>
+      <div class="col-md-3" style="float: left;">
+              <%= f.text_field :qtybalance, :readonly => true, :id => 'qtybalance', :class => 'text_field form-control' %>
+        </div>
+        <div class="col-md-2" style="float: left;">
+          <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <%= f.label 'Desc.', :class => 'control-label col-md-1' %>
+      <div class="col-md-11" style="float: left;">
+        <%= f.text_area :description, :class => 'text_field form-control' %>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <%= f.label 'Issued', :class => 'control-label col-md-1' %>
+      <div class="col-md-9" style="float: left;">
+        <%= f.text_field :qtyissued, :id => 'qtyissued', :class => 'text_field form-control' %>
+      </div>
+      <div class="col-md-2" style="float: left;">
+        <%= f.text_field :unit, :readonly => true, :class => 'text_field form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class='col-md-offset-1 col-md-10'>
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    issuances_path, :class => 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

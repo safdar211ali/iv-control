@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Issues") do |sheet|
+  sheet.add_row ["Issued by","item name","stock name","Description","qtypresent", "qtyissued", "qtybalance"]
+  @issuances.each do |issue|
+    sheet.add_row [issue.user.name,issue.item.name,issue.name,issue.description,issue.qtypresent, issue.qtyissued, issue.qtybalance]
+  end
+end

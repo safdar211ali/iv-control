@@ -1,0 +1,2 @@
+module IssuedHelper
+end

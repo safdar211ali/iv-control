@@ -1,0 +1,4 @@
+<%= form_tag :controller => :issuances, :action => :index do %>
+    <%= text_field :d, :dt, :placeholder => 'Enter Issuance Date', :class => 'text_field form-control' %>
+    <%= submit_tag "Find", :name => nil, :class => 'btn btn-default' %>
+<% end %>

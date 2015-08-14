@@ -41,13 +41,13 @@ Tabulous.setup do
       active_when { in_action('any').of_controller('issuances') }
     end
 
-    stocks_tab do
-      text { 'Stocks' }
-      link_path { stocks_path }
-      visible_when { true }
-      enabled_when { true }
-      active_when { in_action('any').of_controller('stocks') }
-    end
+    # stocks_tab do
+    #   text { 'Stocks' }
+    #   link_path { stocks_path }
+    #   visible_when { true }
+    #   enabled_when { true }
+    #   active_when { in_action('any').of_controller('stocks') }
+    # end
 
     # siteusers_tab do
     #   text          { 'Siteusers' }
